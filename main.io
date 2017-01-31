@@ -14,24 +14,37 @@ input := root pop asObject
 
 generation := input generation
 cells := input cells map(asObject)
+cells := cells map(cell,
+  new := cell clone
+  new x := cell y * -1
+  new y := cell x
+  new
+)
 
 xMin := cells map(x) min
 xMax := cells map(x) max
 yMin := cells map(y) min
 yMax := cells map(y) max
 
+xOffset := 0 - xMin
+yOffset := 0 - yMin
+
 world := list()
 
-world println
 for(x, xMin, xMax, 1,
   world append(list())
-  world println
-
   for(y, yMin, yMax, 1,
-    x println
-    world at(1) println
-
-    # world at(x) append(".")
-    world at(x) println
+    world at(x + xOffset) append(".")
   )
+)
+
+cells map(cell,
+  world at(cell x + xOffset) atPut(cell y + yOffset, "#")
+)
+
+world foreach(x,
+  x foreach(y,
+    y print
+  )
+  writeln("")
 )
