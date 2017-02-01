@@ -8,14 +8,15 @@ Game setup := method(cells,
 
   self xOffset := 0 - xMin
   self yOffset := 0 - yMin
+  self margin := 10
 )
 
 Game emptyBoard := method(
   board := list()
-  for(x, xMin, xMax, 1,
+  for(x, xMin - margin, xMax + margin, 1,
     board append(list())
-    for(y, yMin, yMax, 1,
-      board at(x + xOffset) append(".")
+    for(y, yMin - margin, yMax + margin, 1,
+      board at(x + xOffset + margin) append(".")
     )
   )
   board
@@ -24,7 +25,7 @@ Game emptyBoard := method(
 Game initialBoard := method(
   self board := emptyBoard
   cells map(cell,
-    board at(cell x + xOffset) atPut(cell y + yOffset, "#")
+    board at(cell x + xOffset + margin) atPut(cell y + yOffset + margin, "#")
   )
   self
 )
