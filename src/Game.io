@@ -12,14 +12,14 @@ Game setup := method(cells,
 )
 
 Game emptyBoard := method(
-  board := list()
+  eBoard := list()
   for(x, xMin - margin, xMax + margin, 1,
-    board append(list())
+    eBoard append(list())
     for(y, yMin - margin, yMax + margin, 1,
-      board at(x + xOffset + margin) append(".")
+      eBoard at(x + xOffset + margin) append(".")
     )
   )
-  board
+  eBoard
 )
 
 Game initialBoard := method(
@@ -27,6 +27,49 @@ Game initialBoard := method(
   cells map(cell,
     board at(cell x + xOffset + margin) atPut(cell y + yOffset + margin, "#")
   )
+  self
+)
+
+Game regenerate := method(
+  nextBoard := emptyBoard
+
+  neighbourOffsets := list(
+    list(-1, -1), list(-1, 0), list(-1, 1),
+    list(0, -1), list(0, 1),
+    list(1, -1), list(1, 0), list(1,1)
+  )
+
+  getNeighbourCount := method(origin,
+    count := 0
+    neighbourOffsets foreach(offset,
+      cellX := origin first + offset first
+      cellY := origin last + offset last
+      exception := try(
+        // We might return nil because we are at the edge of the board.
+        cell := board at(cellX) at(cellY)
+        if (cell == "#", count := count + 1)
+      )
+    )
+    count
+  )
+
+  board foreach(xi, x,
+    x foreach(yi, y,
+      count := getNeighbourCount(list(xi, yi))
+
+      if (y == "#",
+        if (count == 2 or count == 3,
+          nextBoard at(xi) atPut(yi, "#"),
+          nextBoard at(xi) atPut(yi, ".")
+        ),
+        if (count == 3,
+          nextBoard at(xi) atPut(yi, "#"),
+          nextBoard at(xi) atPut(yi, ".")
+        )
+      )
+    )
+  )
+  self board := nextBoard
   self
 )
 

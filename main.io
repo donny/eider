@@ -20,3 +20,8 @@ game setup(cells)
 
 board := game initialBoard
 board printBoard
+writeln("")
+board regenerate printBoard
+writeln("")
+board regenerate printBoard
+# board printBoard
