@@ -19,9 +19,11 @@ game := Game clone
 game setup(cells)
 
 board := game initialBoard
+
+writeln("\nInitial Board")
 board printBoard
-writeln("")
-board regenerate printBoard
-writeln("")
-board regenerate printBoard
-# board printBoard
+
+generation repeat(step,
+  writeln("\n\nBoard at Generation: #{step + 1}" interpolate)
+  board regenerate printBoard
+)
