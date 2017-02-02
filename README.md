@@ -60,7 +60,7 @@ The above file specifies the number of generation that we would like to print an
 ..........
 ```
 
-The screenshot of the app in several terminal windows can be seen below:
+The screenshot of the app in action can be seen below:
 
 ![Screenshot](https://raw.githubusercontent.com/donny/eider/master/screenshot.png)
 
