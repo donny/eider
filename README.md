@@ -26,7 +26,7 @@ Hello World
 
 The above code send the `println` message to a `Hello World` string. Similar to Objective-C and Smalltalk, everything is a message and the syntax follows a similar pattern. Io also has an excellent introspection and meta-programming feature, where the application code can be [modified](http://viewsourcecode.org/why/hackety.org/2008/01/05/ioHasAVeryCleanMirror.html) during runtime (like Lisp).
 
-Io can be installed on macOS by running `brew install io`. This unfortunately does not install the [Curses](http://iolanguage.org/reference/index.html#Curses.Curses) library that allows us to write and read at arbitrary positions on the terminal (relevant to our project). Io unfortunately does [not](https://github.com/stevedekorte/io/tree/master/addons/SecureSocket) support `https` out of the box. This prevents us, for example, from using it to scrap and process web sites.
+Io can be installed on macOS by running `brew install io`. This unfortunately does not install the [Curses](http://iolanguage.org/reference/index.html#Curses.Curses) library that allows us to write and read at arbitrary positions on the terminal (relevant to our project).
 
 ### Project
 
@@ -100,4 +100,15 @@ And finally, the function [`regenerate`](https://github.com/donny/eider/blob/mas
 
 ### Conclusion
 
-...
+Io is a nice and simple language, the syntax can be picked up quite easily since it has a minimal number of keywords and operators. I like the fact that the messages can be chained quite naturally as follows:
+
+```io
+// Parse the JSON input into an object.
+root := Yajl clone parse(contents) root
+input := root first asObject
+
+generation := input generation
+cells := input cells map(asObject)
+```
+
+Notice that the above code is not cluttered with `[]` or `{}`. Io unfortunately doesn't have a great number of libraries. For example, Io unfortunately does [not](https://github.com/stevedekorte/io/tree/master/addons/SecureSocket) support `https` out of the box. This prevents us, for example, from using it to scrap and process web sites. But given that its syntax is quite nice and simple; and the fact that it can be embedded. I'm sure that there are certain use cases that can benefit from using Io.
