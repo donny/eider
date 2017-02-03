@@ -48,7 +48,7 @@ Eider is a simple CLI implementation of Conway's Game of Life. The application c
 }
 ```
 
-The above file specifies the number of generation that we would like to print and the cells as coordinates. Eider uses a board-less approach where we don't need to specify the width and height of the board. Thus, the cells' coordinates can be arbitrary. The first three coordinates display a vertical bar below. This corresponds to [`Blinker (period 2)`](https://en.wikipedia.org/wiki/Conway's_Game_of_Life). The next four coordinates display a [tetromino pattern](http://www.math.cornell.edu/~lipa/mec/4life2.png).
+The above file specifies the number of generation that we would like to print and the cells as coordinates. Eider uses an approach where we don't need to specify the width and height of the board. Thus, the cells' coordinates can be arbitrary. The first three coordinates display a vertical bar below. This corresponds to [`Blinker (period 2)`](https://en.wikipedia.org/wiki/Conway's_Game_of_Life). The next four coordinates display a [tetromino pattern](http://www.math.cornell.edu/~lipa/mec/4life2.png).
 
 ```
 ..........
