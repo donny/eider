@@ -66,7 +66,37 @@ The screenshot of the app in action can be seen below:
 
 ### Implementation
 
-...
+The implementation of the game can be found in [`src/Game.io`](https://github.com/donny/eider/blob/master/src/Game.io).
+After we parse the JSON input file, we calculate the minimum and maximum of the cells' x and y coordinates so that we know how big the board is:
+
+```io
+self xMin := cells map(x) min
+self xMax := cells map(x) max
+self yMin := cells map(y) min
+self yMax := cells map(y) max
+```
+
+We use the list data structure to store the board information. Thus, we need to calculate the offsets since our list starts from zero. We also add 10-cell-width margins on all side of the board:
+
+```io
+self xOffset := 0 - xMin
+self yOffset := 0 - yMin
+self margin := 10
+```
+
+The function [`emptyBoard`](https://github.com/donny/eider/blob/master/src/Game.io#L14) creates an empty board with with dead cells (indicated by `.`). The function [`initialBoard`](https://github.com/donny/eider/blob/master/src/Game.io#L25) then populates the empty board with live cells (indicated by `#`) as specified by the JSON input file:
+
+```io
+Game initialBoard := method(
+  self board := emptyBoard
+  cells map(cell,
+    board at(cell x + xOffset + margin) atPut(cell y + yOffset + margin, "#")
+  )
+  self
+)
+```
+
+And finally, the function [`regenerate`](https://github.com/donny/eider/blob/master/src/Game.io#L33) calculates the next generation of the board. This is done by iterating through every cell in the board, calculating the number of neighbours surrounding a cell, and deciding whether that particular cell becomes alive or dead in the next iteration. Lastly, the board is printed by using the function [`printBoard`](https://github.com/donny/eider/blob/master/src/Game.io#L76).
 
 ### Conclusion
 
